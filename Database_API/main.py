@@ -4,7 +4,7 @@ import os
 import mysql.connector
 from fastapi import FastAPI, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.encoders import jsonable_encoder
+# from fastapi.encoders import jsonable_encoder
 from mysql.connector import errorcode
 import jwt
 
@@ -49,18 +49,25 @@ except mysql.connector.Error as err:
 # Define the authentication middleware
 async def authenticate(request: Request):
     try:
-        api_key = request.headers.get('authorization').replace("Bearer ", "")
+        api_key = request.headers.get('authorization')
+        if not api_key:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Authorization header missing"
+            )
+        api_key = api_key.replace("Bearer ", "")
         cursor.execute("SELECT * FROM voters WHERE voter_id = %s", (api_key,))
         if api_key not in [row[0] for row in cursor.fetchall()]:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Forbidden"
             )
-    except:
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Forbidden"
         )
+
 
 # Define the POST endpoint for login
 @app.get("/login")
