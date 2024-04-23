@@ -1,4 +1,4 @@
-# Decentralised-Voting-System
+# Decentralized-Voting-System-Using-Ethereum-Blockchain
 
 #### The Decentralized Voting System using Ethereum Blockchain is a secure and transparent solution for conducting elections. Leveraging Ethereum's blockchain technology, this system ensures tamper-proof voting records, enabling users to cast their votes remotely while maintaining anonymity and preventing fraud. Explore this innovative project for trustworthy and decentralized voting processes.
 
@@ -107,6 +107,7 @@
         truffle migrate
 
 You're all set! The Voting app should be up and running now at http://localhost:8080/.<br>
+For more info about usage checkout [YouTube video](https://www.youtube.com/watch?v=a5CJ70D2P-E).
 
 ## Code Structure
 
